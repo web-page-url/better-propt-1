@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Final Better Prompt — for Application (Exact Text)</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <script src="script.js"></script>
+  <div class="stage" role="main">
+    <div class="card" aria-label="Final Cursor Prompt card">
+      <div class="top-info" aria-hidden="true">
+        <div class="logo">
+          <div class="mark" aria-hidden="true">BM</div>
+          <div>
+            <div class="title">BrightMind — Final Cursor Prompt (Exact)</div>
+            <div class="subtle">Mobile-first • Local-only • Copy-paste ready</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button id="downloadBtn" class="btn" title="Download prompt as .txt">Download</button>
+        </div>
+      </div>
+
+      <div class="prompt-wrap">
+        <pre id="prompt" tabindex="0" aria-label="Final Cursor Prompt content"></pre>
+        <div class="controls" aria-hidden="true">
+          <button id="copyBtn" class="btn" title="Copy exact text to clipboard">Copy</button>
+        </div>
+      </div>
+
+      <div class="copy-badge" id="badge" aria-hidden="true">Copied to clipboard ✓</div>
+      <div class="shine" aria-hidden="true"></div>
+    </div>
+  </div>
+  
+  <!-- Scroll to top button -->
+  <button class="scroll-top" id="scrollTop" title="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 19V5M5 12L12 5L19 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</div>
+
+<!-- The exact text is stored here verbatim (DO NOT EDIT). It's placed in a non-JS script so HTML tags and backticks remain unparsed. -->
+  <script id="promptTemplate" type="text/plain">
+Final Cursor Prompt (Copy-Paste)
+You are an expert full-stack engineer and creative product designer.  
+Build a production-ready **Next.js 14+ (App Router + TypeScript)** web app called **BrightMind**.  
+This is an **AI-powered youth mental wellness companion** that runs fully **local-only (no database)**.  
+
+The app should be **visually appealing, mobile-first, and dopamine-triggering**, using **animations, hover effects, smooth transitions, and modern UI/UX principles**.
+
+====================================================================
+🌟 CORE IDEA
+====================================================================
+BrightMind helps teens/young adults reflect on their feelings, journal safely, learn coping skills, and access non-stigmatizing resources.  
+
+- Confidential, no signup required.  
+- Anonymous and local-first (IndexedDB + LocalStorage).  
+- AI chat powered by Gemini (safe, empathetic, supportive).  
+- Visually engaging, fun, and stress-reducing UI.  
+- Works offline for key tools (breathing, grounding, learn library).  
+
+====================================================================
+🎨 DESIGN SYSTEM
+====================================================================
+- Framework: **Next.js 14+ (App Router, TypeScript)**  
+- Styling: **TailwindCSS + shadcn/ui**  
+- Animations: **Framer Motion** for page transitions, cards, modals, breathing tool.  
+- Icons: **lucide-react**  
+- Visual style:  
+  - Soft gradients (blue, purple, pink) with glassmorphism overlays.  
+  - Rounded corners (2xl), drop shadows, subtle glows.  
+  - Hover effects: scale up, rotate icons slightly, show background shimmer.  
+  - Micro-interactions: button ripples, animated check-ins, typing dots in chat.  
+- Dark/Light themes with smooth transition toggle.  
+- Mobile-first responsive grid layout (flex/grid).  
+- Typography: modern sans-serif with varied sizes (lg/xl for headings, sm for helper text).  
+
+====================================================================
+📱 UX PRINCIPLES
+====================================================================
+- **Mobile first**: design optimized for phones; desktop is wider card layout.  
+- **Engaging**: dopamine-triggering—animations, emoji-friendly UI, colorful check-ins.  
+- **Simple**: less text, more cards, buttons, and emojis.  
+- **Empathetic tone**: UI messages are warm and validating.  
+- **Accessibility**: WCAG 2.2 AA, screen reader labels, keyboard nav.  
+
+====================================================================
+⚙️ STORAGE (NO DATABASE)
+====================================================================
+- Store everything locally with **IndexedDB** (via localforage).  
+- Use LocalStorage for lightweight preferences (theme, onboarding complete).  
+- Data stored:  
+  - Journals  
+  - Mood check-ins  
+  - App settings (theme, region, onboarding)  
+- Features:  
+  - Export to JSON file  
+  - Import from JSON file  
+  - "Delete All Data" button in Settings  
+  - Auto-delete journals by expiration date (handled client-side only)  
+
+====================================================================
+🤖 AI CHAT (GEMINI)
+====================================================================
+- Gemini model:  
+  - `gemini-2.0-flash` for chat  
+  - `gemini-2.0-pro` for journaling summaries  
+- AI Prompt (system):  
+
+
+
+You are a supportive mental wellness companion for youth.
+You never diagnose or prescribe.
+You listen with empathy, use simple words, and encourage coping strategies.
+If user expresses self-harm, abuse, or crisis:
+1. Acknowledge feelings kindly.
+2. Say you cannot help in emergencies.
+3. Encourage reaching out immediately to trusted people or helplines.
+4. Show crisis resources and grounding exercises.
+Always end with a gentle, optional next step.
+
+- **Safety flow**:  
+- Run regex keyword check before sending to Gemini.  
+- If crisis words detected → skip Gemini → show **Crisis Banner** (with regional helplines from JSON).  
+- Otherwise → send to Gemini.  
+
+====================================================================
+📂 PAGES & ROUTES
+====================================================================
+- `/` → Landing Page (hero, features, privacy, CTA "Open App")  
+- `/app/dashboard` → Main hub  
+- `/app/chat` → AI Companion  
+- `/app/journal` → Journal list + create/edit  
+- `/app/tools` → Tools library (breathing, grounding, relaxation)  
+- `/app/learn` → MDX-based Learn library  
+- `/app/resources` → Helplines/resources page  
+- `/app/settings` → Settings (theme, data export/import/delete, region selector)  
+
+====================================================================
+🖼️ COMPONENTS (MUST BE ANIMATED & RESPONSIVE)
+====================================================================
+**Landing Page**
+- <LandingHero /> → Gradient background, animated headline, CTA button with hover glow.  
+- <FeatureCards /> → Animated cards that scale/rotate slightly on hover.  
+- <SafetySection /> → Animated shield icon, fade-in text.  
+- <Footer /> → Minimal with links.  
+
+**Dashboard**
+- <MoodCheckinCard /> → Emoji slider, animated face changes on hover.  
+- <QuickActions /> → Animated buttons (Chat, Journal, Tools, Learn).  
+- <StreaksCard /> → Fire/heart emoji animation when streak continues.  
+
+**Chat**
+- <ChatThread /> → Smooth fade-in bubbles, animated typing dots.  
+- <MessageBubble /> → Hover glow, gentle pop animation.  
+- <CrisisBanner /> → Flashing glow (calm pulse, not alarming).  
+
+**Journal**
+- <EntryCard /> → Animated flip card effect.  
+- <EntryEditor /> → Smooth transitions when typing.  
+- <ExportDialog /> → Modal with fade + scale animation.  
+
+**Tools**
+- <BreathingTimer /> → Expanding/contracting animated circle synced to inhale/exhale.  
+- <GroundingSteps /> → Step-by-step animation with fade-in for each step.  
+
+**Learn**
+- <ArticleList /> → Cards with hover lift + shadow.  
+- <ArticlePage /> → Progress bar animation at top.  
+
+**Settings**
+- <DataControls /> → Animated buttons for export/import/delete.  
+- <ThemeToggle /> → Sun/Moon icon rotates when switching.  
+
+====================================================================
+🛠️ FEATURES
+====================================================================
+✅ Mood check-ins (emoji-based, stored locally)  
+✅ AI chat with Gemini, safe and empathetic  
+✅ Journal (create/edit/delete/export/import, local only)  
+✅ Coping tools (breathing, grounding) with animations  
+✅ Learn library (static MDX, offline-capable)  
+✅ Resource page (JSON-based, region-specific helplines)  
+✅ Settings with privacy-first controls (delete all data, theme, export/import)  
+✅ Mobile responsive UI with Tailwind + shadcn/ui  
+✅ Hover effects, animations, micro-interactions everywhere  
+
+====================================================================
+🚀 DEPLOYMENT
+====================================================================
+- Deploy on Vercel  
+- Only server route: `/api/chat` (wraps Gemini API call + safety checks)  
+- All other features work offline after load (PWA-ready)  
+
+====================================================================
+✅ ACCEPTANCE CRITERIA
+====================================================================
+- Works **without database**; all storage is local.  
+- Landing page is visually stunning and animated.  
+- Mobile-first, responsive, accessible.  
+- Every major UI element has animation or hover effect.  
+- Crisis handling is safe (no unsafe AI responses).  
+- Data export/import/delete fully functional.  
+
+
+
+⚡ With this master prompt, Cursor will build you a fully animated, mobile-responsive, visually engaging Next.js + Gemini app — with zero database, 100% local-first.
+  </script>
+
+  <script>
+    // Insert exact text into the pre element (preserves angle brackets and backticks)
+    (function(){
+      const tpl = document.getElementById('promptTemplate');
+      const out = document.getElementById('prompt');
+      out.textContent = tpl.textContent.trimStart(); // keep content exact; trim only leading accidental newline if present
+
+      // Copy functionality
+      const copyBtn = document.getElementById('copyBtn');
+      const badge = document.getElementById('badge');
+      copyBtn.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText(out.textContent);
+          badge.classList.add('show');
+          setTimeout(()=> badge.classList.remove('show'), 1800);
+        }catch(e){
+          // fallback
+          const ta = document.createElement('textarea');
+          ta.value = out.textContent;
+          document.body.appendChild(ta);
+          ta.select();
+          try{ document.execCommand('copy'); badge.classList.add('show'); setTimeout(()=> badge.classList.remove('show'), 1800); }catch(e2){}
+          ta.remove();
+        }
+      });
+
+      // Download as .txt
+      const downloadBtn = document.getElementById('downloadBtn');
+      downloadBtn.addEventListener('click', ()=>{
+        const blob = new Blob([out.textContent], {type:'text/plain;charset=utf-8'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'brightmind-final-cursor-prompt.txt';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      // keyboard shortcut: Ctrl/Cmd + C to copy when pre focused
+      out.addEventListener('keydown', (e)=>{
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
+          e.preventDefault();
+          copyBtn.click();
+        }
+      });
+
+      // Scroll to top functionality
+      const scrollTopBtn = document.getElementById('scrollTop');
+      
+      // Show/hide scroll button based on scroll position
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      });
+      
+      // Scroll to top when button is clicked
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Update footer text
+      const footerText = document.querySelector('.subtle');
+      if (footerText) {
+        footerText.innerHTML = 'CREATE WITH <span style="color:#ff6b6b;">&#10084;&#65039;</span> BY - ANUBHAV';
+      }
+
+    })();
+  </script>
+</body>
+</html>
